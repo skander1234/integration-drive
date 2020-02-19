@@ -8,9 +8,17 @@ package Test;
 import Core.*;
 import Entities.*;
 import Utils.Criteres;
+import Utils.DataSource;
 import Utils.Interval;
-import java.util.Date;
+import com.nexmo.client.NexmoClient;
+import com.nexmo.client.NexmoClientException;
+import com.nexmo.client.sms.SmsSubmissionResponse;
+import com.nexmo.client.sms.SmsSubmissionResponseMessage;
+import com.nexmo.client.sms.messages.TextMessage;
+import java.io.IOException;
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
@@ -26,9 +34,28 @@ public class DriveIntegration {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NexmoClientException {
        int choix = -1;
-         
+NexmoClient client = new NexmoClient.Builder()
+  .apiKey("7977f070")
+  .apiSecret("pmA7QUR3bPFRhrDJ")
+  .build();
+
+String messageText = "Nous sommes l'application ";
+TextMessage message = new TextMessage("Drive", "21628186655", messageText);
+
+SmsSubmissionResponse response;
+        try {
+            response = client.getSmsClient().submitMessage(message);
+for (SmsSubmissionResponseMessage responseMessage : response.getMessages()) {
+    System.out.println(responseMessage);
+}
+        } catch (IOException ex) {
+            System.out.println("erreur");
+           // Logger.getLogger(DriveIntegration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
          while(choix == 0 || (choix<0 || choix>5)){
              
              System.out.println(" 0 - Quitter");
@@ -69,5 +96,4 @@ public class DriveIntegration {
       
 
     }
-
 }
