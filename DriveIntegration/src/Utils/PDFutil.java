@@ -16,6 +16,7 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import Entities.Event;
+import Entities.Location;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.io.File;
@@ -39,18 +40,18 @@ public class PDFutil {
     public PDFutil() {
         cn2 = DataSource.getInstance().getConnexion();
     }
-    public void listEvent() throws SQLException,FileNotFoundException,DocumentException,IOException 
+    public void listLocation() throws SQLException,FileNotFoundException,DocumentException,IOException 
     {
         Document doc = new Document();
         
        
         ste=cn2.createStatement();
-        ResultSet rs=ste.executeQuery("SELECT * FROM event");
-        PdfWriter.getInstance(doc, new FileOutputStream("./Liste Activité.pdf"));
+        ResultSet rs=ste.executeQuery("SELECT date_d,date_f,prix FROM location ");
+        PdfWriter.getInstance(doc, new FileOutputStream("./Locationn.pdf"));
         
         doc.open();
         doc.add(new Paragraph("   "));
-        doc.add(new Paragraph("  Liste des activités:  "));
+        doc.add(new Paragraph("  Location:  "));
         doc.add(new Paragraph("   "));
         
         PdfPTable table = new PdfPTable(4);
@@ -62,42 +63,23 @@ public class PDFutil {
         cell.setBackgroundColor(Color.RED);
         table.addCell(cell);*/
         
-        cell = new PdfPCell(new Phrase("nom",FontFactory.getFont("Comic Sans MS",12)));
+        cell = new PdfPCell(new Phrase("Date debut de la location",FontFactory.getFont("Comic Sans MS",12)));
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         cell.setBackgroundColor(Color.orange);
         table.addCell(cell);
         
-        cell = new PdfPCell(new Phrase("nbr_place",FontFactory.getFont("Comic Sans MS",12)));
-        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-        cell.setBackgroundColor(Color.orange);
-        table.addCell(cell);
-        
-        
-          cell = new PdfPCell(new Phrase("depart",FontFactory.getFont("Comic Sans MS",12)));
-        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-        cell.setBackgroundColor(Color.orange);
-        table.addCell(cell);
-        
-          cell = new PdfPCell(new Phrase("arrivee",FontFactory.getFont("Comic Sans MS",12)));
-        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-        cell.setBackgroundColor(Color.orange);
-        table.addCell(cell); 
-        
-          cell = new PdfPCell(new Phrase("date_allee",FontFactory.getFont("Comic Sans MS",12)));
-        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-        cell.setBackgroundColor(Color.orange);
-        table.addCell(cell);
-        
-        cell = new PdfPCell(new Phrase("date_retour",FontFactory.getFont("Comic Sans MS",12)));
+        cell = new PdfPCell(new Phrase("Date fin de la location",FontFactory.getFont("Comic Sans MS",12)));
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         cell.setBackgroundColor(Color.orange);
         table.addCell(cell);
         
         
-        cell = new PdfPCell(new Phrase("Description",FontFactory.getFont("Comic Sans MS",12)));
+          cell = new PdfPCell(new Phrase("Prix de la location",FontFactory.getFont("Comic Sans MS",12)));
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         cell.setBackgroundColor(Color.orange);
         table.addCell(cell);
+        
+          
         
         /*cell = new PdfPCell(new Phrase("IDenfants",FontFactory.getFont("Comic Sans MS",12)));
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -111,48 +93,42 @@ public class PDFutil {
         
      while (rs.next()) {                
             
-               Event e = new Event();
+               Location p = new Location();
             //    a.setId(rs.getInt(1));
-                   e.setNom(rs.getString(2));
-               e.setNbr_place(rs.getInt(3));
-                e.setDepart(rs.getString(4));
-                e.setArrivee(rs.getString(5));
-                e.setDate_allee(rs.getTimestamp(6));
-                e.setDate_retour(rs.getTimestamp(7));
-                e.setDescription(rs.getString(8));
+                   
+                p.setDate_d(rs.getTimestamp(1));
+                p.setDate_f(rs.getTimestamp(2));
+                p.setPrix(rs.getFloat(3));
               
                /*cell = new PdfPCell(new Phrase(String.valueOf(a.getId()),FontFactory.getFont("Comic Sans MS",12)));
                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                cell.setBackgroundColor(Color.pink);
                table.addCell(cell);*/
                
-               cell = new PdfPCell(new Phrase(e.getNom(),FontFactory.getFont("Comic Sans MS",12)));
+               cell = new PdfPCell(new Phrase(String.valueOf(p.getDate_d()),FontFactory.getFont("Comic Sans MS",12)));
                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                cell.setBackgroundColor(Color.pink);
                table.addCell(cell);
                
               
                
-         cell = new PdfPCell(new Phrase(e.getDepart(),FontFactory.getFont("Comic Sans MS",12)));
+                 cell = new PdfPCell(new Phrase(String.valueOf(p.getDate_f()),FontFactory.getFont("Comic Sans MS",12)));
                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                cell.setBackgroundColor(Color.pink);
                table.addCell(cell);
         
-               cell = new PdfPCell(new Phrase(e.getArrivee(),FontFactory.getFont("Comic Sans MS",12)));
+               cell = new PdfPCell(new Phrase(String.valueOf(p.getPrix()),FontFactory.getFont("Comic Sans MS",12)));
                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                cell.setBackgroundColor(Color.pink);
                table.addCell(cell);
                
-                cell = new PdfPCell(new Phrase(e.getDescription(),FontFactory.getFont("Comic Sans MS",12)));
-               cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-               cell.setBackgroundColor(Color.pink);
-               table.addCell(cell);
+                
                
               
                
                         }
             doc.add(table);
             doc.close();
-            Desktop.getDesktop().open(new File ("./Liste Activité.pdf"));
+            Desktop.getDesktop().open(new File ("./Locationn.pdf"));
             }
 }

@@ -42,7 +42,7 @@ NexmoClient client = new NexmoClient.Builder()
   .build();
 
 String messageText = "Nous sommes l'application ";
-TextMessage message = new TextMessage("Drive", "21628186655", messageText);
+TextMessage message = new TextMessage("Drive", "21682726655", messageText);
 
 SmsSubmissionResponse response;
         try {

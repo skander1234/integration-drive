@@ -15,9 +15,9 @@ public class TrayIconDemo {
         TrayIcon trayIcon = new TrayIcon(image, "Tray ajout");
         //Let the system resize the image if needed
         trayIcon.setImageAutoSize(true);
-        trayIcon.setToolTip("System tray ajout");
+        trayIcon.setToolTip("Location ajoutée");
         tray.add(trayIcon);
 
-        trayIcon.displayMessage("Admin", "Activité ajoutée avec succee", MessageType.INFO);
+        trayIcon.displayMessage("Location", "Location ajoutée ", MessageType.INFO);
     }
 }
