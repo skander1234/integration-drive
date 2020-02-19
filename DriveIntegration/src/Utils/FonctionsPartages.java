@@ -33,7 +33,11 @@ public class FonctionsPartages {
               long intervalle = date2.getTime() - date1.getTime();
         return (int) TimeUnit.SECONDS.convert(intervalle, TimeUnit.MILLISECONDS);
         }
- 
+         public static int calculerNbreDePlace(int nbr_place){
+        nbr_place--;
+        
+        return nbr_place;
+        }
         public static float calculerPrixParraportAuTemps(float prixDuneHeure,int seconde){
         return ((float) seconde/3600)*prixDuneHeure;
         }
