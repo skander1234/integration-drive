@@ -11,9 +11,6 @@ import Utils.Criteres;
 import Utils.DataSource;
 import Utils.FonctionsPartages;
 import Utils.Interval;
-import Utils.TrayIconDemo;
-import java.awt.AWTException;
-import java.awt.SystemTray;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -82,16 +79,6 @@ public class LocationC {
             pst.setTimestamp(4,(Timestamp) p.getDate_f());
             pst.setFloat(5,prix);
             pst.executeUpdate();
-                if (SystemTray.isSupported()) {
-            TrayIconDemo td = new TrayIconDemo();
-                try {
-                    td.trayAjout();
-                } catch (AWTException ex) {
-                    Logger.getLogger(EventC.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        } else {
-            System.err.println("System tray not supported!");
-        }
         } catch (SQLException ex) {
             Logger.getLogger(LocationC.class.getName()).log(Level.SEVERE, null, ex);
         }

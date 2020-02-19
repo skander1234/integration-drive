@@ -37,12 +37,6 @@ public class FonctionsPartages {
         public static float calculerPrixParraportAuTemps(float prixDuneHeure,int seconde){
         return ((float) seconde/3600)*prixDuneHeure;
         }
-     
-        public static int calculerNbreDePlace(int nbr_place){
-        nbr_place--;
-        
-        return nbr_place;
-        }
         
         public static List<String> retournerListeChamp(String table){
          List<String> list=new ArrayList<>();

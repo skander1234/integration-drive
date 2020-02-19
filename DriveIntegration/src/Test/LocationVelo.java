@@ -14,11 +14,7 @@ import Entities.Velo;
 import Utils.Criteres;
 import Utils.DataSource;
 import Utils.Interval;
-import Utils.PDFutil;
-import com.lowagie.text.DocumentException;
-import java.io.IOException;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -46,13 +42,12 @@ public class LocationVelo {
              java.util.Date parsedDate2 = dateFormat.parse("2021-02-09 12:55:05");
           Timestamp timestamp1=new java.sql.Timestamp(parsedDate.getTime());
           Timestamp timestamp2=new java.sql.Timestamp(parsedDate2.getTime());
-          User u=new User(16,54526394,"hj","iop",1,"mail@gmail.com");
-          Client c= new Client(u,12);
-          
-          Velo v = new Velo(2,"velo","hs",3,"hsdh",3);
+          User u=new User(1,54526394,"hj","iop",1,"mail@gmail.com");
+          Client c= new Client(u,5);
+          Velo v = new Velo(19,"velo","hs",3,"hsdh",3);
           Location p = new Location(c,v,timestamp1,timestamp2);
           LocationC pr = new LocationC();
-          pr.ajouterLocation(p);
+          //pr.ajouterLocation(p);
           //System.out.println(pr.afficher());
         
           
@@ -79,18 +74,6 @@ public class LocationVelo {
     
     
           //System.out.println(pr.RechercheAvance("5"));
-          PDFutil pdf = new PDFutil();
-            
-                try {
-                    pdf.listLocation();
-                } catch (SQLException ex) {
-                    Logger.getLogger(LocationVelo.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (DocumentException ex) {
-                    Logger.getLogger(LocationVelo.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
-                    Logger.getLogger(LocationVelo.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
           } catch (ParseException ex) {
             Logger.getLogger(DriveIntegration.class.getName()).log(Level.SEVERE, null, ex);
         }
