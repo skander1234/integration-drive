@@ -28,6 +28,37 @@ private  int nbr_place;
  private Timestamp date_allee;
  private Timestamp date_retour;
  private String description;
+ private double longitude;
+ private double altitude;
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getAltitude() {
+        return altitude;
+    }
+
+    public void setAltitude(double altitude) {
+        this.altitude = altitude;
+    }
+
+    public Event(int id_event, String nom, int nbr_place, String depart, String arrivee, Timestamp date_allee, Timestamp date_retour, String description, double longitude, double altitude) {
+        this.id_event = id_event;
+        this.nom = nom;
+        this.nbr_place = nbr_place;
+        this.depart = depart;
+        this.arrivee = arrivee;
+        this.date_allee = date_allee;
+        this.date_retour = date_retour;
+        this.description = description;
+        this.longitude = longitude;
+        this.altitude = altitude;
+    }
 
     public Event(int id_event, String nom, int nbr_place, String depart, String arrivee, Timestamp date_allee, Timestamp date_retour, String description) {
         this.id_event = id_event;
@@ -38,6 +69,18 @@ private  int nbr_place;
         this.date_allee = date_allee;
         this.date_retour = date_retour;
         this.description = description;
+    }
+
+    public Event(String nom, int nbr_place, String depart, String arrivee, Timestamp date_allee, Timestamp date_retour, String description, double longitude, double altitude) {
+        this.nom = nom;
+        this.nbr_place = nbr_place;
+        this.depart = depart;
+        this.arrivee = arrivee;
+        this.date_allee = date_allee;
+        this.date_retour = date_retour;
+        this.description = description;
+        this.longitude = longitude;
+        this.altitude = altitude;
     }
  
     public Event() {
@@ -64,8 +107,9 @@ private  int nbr_place;
 
     @Override
     public String toString() {
-        return "Event{" + "id_event=" + id_event + ", nom=" + nom + ", nbr_place=" + nbr_place + ", depart=" + depart + ", arrivee=" + arrivee + ", date_allee=" + date_allee + ", date_retour=" + date_retour + ", description=" + description + '}';
+        return "Event{" + "id_event=" + id_event + ", nom=" + nom + ", nbr_place=" + nbr_place + ", depart=" + depart + ", arrivee=" + arrivee + ", date_allee=" + date_allee + ", date_retour=" + date_retour + ", description=" + description + ", longitude=" + longitude + ", altitude=" + altitude + '}';
     }
+
 
     @Override
     public int hashCode() {
